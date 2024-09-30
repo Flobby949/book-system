@@ -1,7 +1,6 @@
 package com.soft.book.dao;
 
 import com.soft.book.model.dto.UserDTO;
-import com.soft.book.model.entity.User;
 
 /**
  * @author : Flobby
@@ -13,8 +12,6 @@ import com.soft.book.model.entity.User;
 public interface UserDAO {
 
     boolean insertUser(UserDTO user);
-
-    User validUser(String username);
 
     void selectAllUser();
 

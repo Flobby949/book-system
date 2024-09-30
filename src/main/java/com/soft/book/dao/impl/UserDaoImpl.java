@@ -34,16 +34,6 @@ public class UserDaoImpl implements UserDAO {
     }
 
     @Override
-    public User validUser(String username) {
-        String sql = "select * from t_user where username = ? and delete_flag = 0";
-        try {
-            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(User.class), username);
-        } catch (Exception e) {
-            return null;
-        }
-    }
-
-    @Override
     public void selectAllUser() {
         String sql = "select * from t_user ";
         List<User> query = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(User.class));

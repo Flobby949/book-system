@@ -1,7 +1,5 @@
 package com.soft.book.service;
 
-import com.soft.book.model.dto.UserDTO;
-
 /**
  * @author : Flobby
  * @program : book-system
@@ -10,7 +8,5 @@ import com.soft.book.model.dto.UserDTO;
  **/
 
 public interface UserService {
-
-    boolean register(UserDTO user);
 
 }
