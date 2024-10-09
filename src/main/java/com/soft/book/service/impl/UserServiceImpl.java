@@ -1,6 +1,7 @@
 package com.soft.book.service.impl;
 
 import com.soft.book.cache.GlobalCache;
+import com.soft.book.dao.UserDAO;
 import com.soft.book.model.dto.UserDTO;
 import com.soft.book.service.UserService;
 import com.soft.book.utils.Md5Util;
@@ -14,15 +15,25 @@ import com.soft.book.utils.Md5Util;
 
 public class UserServiceImpl implements UserService {
 
+    private final UserDAO userDao = GlobalCache.getUserDao();
+
     @Override
     public boolean register(UserDTO user) {
         // 判断用户名是否已经存在
-        if (GlobalCache.getUserDao().validUser(user.getUsername()) != null) {
+        if (userDao.validUser(user.getUsername()) != null) {
             return false;
         }
         // 对密码进行MD5加密
         user.setPassword(Md5Util.encode(user.getPassword()));
         return GlobalCache.getUserDao().insertUser(user);
+    }
+
+    @Override
+    public boolean validate(String username) {
+        if (username == null || username.trim().isEmpty()) {
+            return false;
+        }
+        return userDao.validUser(username) != null;
     }
 
 }

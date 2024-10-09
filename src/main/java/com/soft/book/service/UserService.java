@@ -13,4 +13,6 @@ public interface UserService {
 
     boolean register(UserDTO user);
 
+    boolean validate(String username);
+
 }

@@ -123,7 +123,7 @@
       border: none;
       outline: none;
       border-radius: 3px;
-      background-color: rgb(36, 169, 190);
+      background-color: #24A9BE;
       color: #fff;
       box-shadow: 2px 5px 10px #aaa;
       cursor: pointer;
@@ -194,7 +194,7 @@
     </div>
     <div>
       <label>
-        <input type="submit" value="注册" class="btn">
+        <input type="submit" value="注册" id="registerBtn" class="btn">
       </label>
     </div>
   </form>
@@ -202,10 +202,11 @@
 <script>
   let des = document.getElementById("des");
   let account = document.getElementById("account")
+  let registerBtn = document.getElementById("registerBtn")
 
   account.onblur = function ()  {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', "validAccount/" + account.value)
+    xhr.open('GET', "user/validate/" + account.value)
     xhr.send()
     xhr.onreadystatechange = function () {
         if (xhr.readyState === 4 && xhr.status === 200) {
@@ -214,9 +215,12 @@
             console.log(xhr.responseText);
             des.innerHTML = "账号已存在"
             des.style.color = "#ff0000"
+            registerBtn.disabled = true
+            registerBtn.style.background = "#ccc"
           }else {
             des.innerHTML = "账号可用"
             des.style.color = "#00ff00"
+            registerBtn.style.background = "#24A9BE"
           }
         }
     }
