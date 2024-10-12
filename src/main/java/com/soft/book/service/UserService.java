@@ -9,4 +9,9 @@ package com.soft.book.service;
 
 public interface UserService {
 
+    boolean register(String username, String password);
+
+    boolean login(String username, String password);
+
+    boolean validAccount(String username);
 }

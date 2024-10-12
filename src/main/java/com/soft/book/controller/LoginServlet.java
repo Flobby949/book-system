@@ -1,5 +1,8 @@
 package com.soft.book.controller;
 
+import com.soft.book.cache.GlobalCache;
+import com.soft.book.service.UserService;
+import com.soft.book.utils.ResultUtil;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -18,6 +21,8 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
+    private final UserService userService = GlobalCache.getUserService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher("login.html").forward(req, resp);
@@ -25,6 +30,21 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        System.out.println("login请求");
+        resp.setContentType("text/html;charset=utf-8");
+        resp.setCharacterEncoding("utf-8");
+        String username = req.getParameter("username");
+        String password = req.getParameter("password");
+        System.out.println("username = " + username);
+        System.out.println("password = " + password);
+        if (username == null || username.isEmpty() || password == null || password.isEmpty()) {
+            ResultUtil.failResult(resp, "登录失败");
+            return;
+        }
+        boolean login = userService.login(username, password);
+        if (login) {
+            resp.sendRedirect("/index.jsp");
+        } else {
+            ResultUtil.failResult(resp, "登录失败");
+        }
     }
 }
