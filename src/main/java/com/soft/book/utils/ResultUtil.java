@@ -27,9 +27,19 @@ public class ResultUtil {
         String result = String.format("""
                     <script>
                         alert("%s！");
-                        location.href = "/"
                     </script>
                 """, message);
+        response.getWriter().write(result);
+    }
+
+    public static void alertMessage(String message, HttpServletResponse response, String targetUrl) throws IOException {
+        response.setContentType("text/html;charset=utf-8");
+        String result = String.format("""
+                    <script>
+                        alert("%s！");
+                        location.href = "%s";
+                    </script>
+                """, message, targetUrl);
         response.getWriter().write(result);
     }
 }

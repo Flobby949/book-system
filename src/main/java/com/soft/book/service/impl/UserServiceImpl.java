@@ -3,6 +3,7 @@ package com.soft.book.service.impl;
 import com.soft.book.cache.GlobalCache;
 import com.soft.book.dao.UserDAO;
 import com.soft.book.model.dto.UserDTO;
+import com.soft.book.model.entity.User;
 import com.soft.book.service.UserService;
 import com.soft.book.utils.Md5Util;
 
@@ -35,5 +36,15 @@ public class UserServiceImpl implements UserService {
         }
         return userDao.validUser(username) != null;
     }
+
+    @Override
+    public boolean login(String username, String password) {
+        User user = userDao.validUser(username);
+        if (user == null) {
+            return false;
+        }
+        return user.getPassword().equals(Md5Util.encode(password));
+    }
+
 
 }

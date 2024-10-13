@@ -31,21 +31,21 @@ public class RegisterServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         if (username == null || password == null || username.isEmpty() || password.isEmpty()) {
-            ResultUtil.alertMessage("用户名或密码不能为空", resp);
+            ResultUtil.alertMessage("用户名或密码不能为空", resp, "/register");
         }
         String verifyCode = req.getParameter("verifyCode");
         String code = (String)req.getSession().getAttribute("code");
         if (!code.equalsIgnoreCase(verifyCode)) {
-            ResultUtil.alertMessage("验证码错误", resp);
+            ResultUtil.alertMessage("验证码错误", resp, "/register");
         }
         boolean resultFlag = GlobalCache.getUserService().register(UserDTO.builder()
                 .username(username)
                 .password(password)
                 .build());
         if (resultFlag) {
-            ResultUtil.alertMessage("注册成功", resp);
+            ResultUtil.alertMessage("注册成功", resp, "/register");
         } else {
-            ResultUtil.alertMessage("注册失败", resp);
+            ResultUtil.alertMessage("注册失败", resp, "/register");
         }
     }
 }
