@@ -33,7 +33,7 @@ public class UserServlet extends HttpServlet {
                 resp.getWriter().write("false");
             }
         } else if (uri.endsWith("/userinfo")) {
-            System.out.println("userinfo");
+            resp.sendRedirect("/user.jsp");
         } else {
             System.out.println("error");
         }

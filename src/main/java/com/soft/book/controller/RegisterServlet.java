@@ -43,7 +43,7 @@ public class RegisterServlet extends HttpServlet {
                 .password(password)
                 .build());
         if (resultFlag) {
-            ResultUtil.alertMessage("注册成功", resp, "/register");
+            ResultUtil.alertMessage("注册成功", resp, "/");
         } else {
             ResultUtil.alertMessage("注册失败", resp, "/register");
         }

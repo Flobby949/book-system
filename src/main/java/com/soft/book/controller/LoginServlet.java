@@ -35,9 +35,10 @@ public class LoginServlet extends HttpServlet {
         boolean flag = userService.login(username, password);
         if (flag) {
             req.getSession().setAttribute("token", username);
-            ResultUtil.alertMessage("登录成功", resp, "/index.jsp");
+            ResultUtil.alertMessage("登录成功", resp);
+            resp.sendRedirect("/index");
         }  else {
-            ResultUtil.alertMessage("用户名或密码错误", resp, "/index.jsp");
+            ResultUtil.alertMessage("用户名或密码错误", resp, "/");
         }
     }
 }
