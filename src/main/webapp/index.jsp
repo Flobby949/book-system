@@ -84,6 +84,7 @@
 <body>
 <%
     List<Book> bookList = (List<Book>) request.getAttribute("bookList");
+    System.out.println(bookList);
 %>
 <%--使用jsp的include动作，将top.jsp页面包含进来，这个顶部导航可以给各个页面共享--%>
 <div id="top">
@@ -115,7 +116,7 @@
                 <%--引用col-2表示每行显示5本，再追加card细节样式--%>
                 <div class="col-2 card">
                     <%--点击每本图书封面图，地址栏跳转为/detail/id,进入图书详情Servlet--%>
-                    <a href="${pageContext.request.contextPath}/detail/${book.id}">
+                    <a href="${pageContext.request.contextPath}/detail/${book.pkId}">
                         <img src="${book.cover}" alt="">
                     </a>
                     <p style="color: rgb(51, 119, 178)">${book.name}</p>

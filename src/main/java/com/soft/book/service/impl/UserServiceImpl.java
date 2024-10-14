@@ -4,6 +4,7 @@ import com.soft.book.cache.GlobalCache;
 import com.soft.book.dao.UserDAO;
 import com.soft.book.model.dto.UserDTO;
 import com.soft.book.model.entity.User;
+import com.soft.book.model.vo.UserVO;
 import com.soft.book.service.UserService;
 import com.soft.book.utils.Md5Util;
 
@@ -38,12 +39,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean login(String username, String password) {
+    public UserVO login(String username, String password) {
         User user = userDao.validUser(username);
         if (user == null) {
-            return false;
+            return null;
         }
-        return user.getPassword().equals(Md5Util.encode(password));
+        if (!user.getPassword().equals(Md5Util.encode(password))) {
+            return null;
+        }
+        return UserVO.builder()
+                .id(user.getId())
+                .username(user.getUsername())
+                .nickname(user.getNickname())
+                .avatar(user.getAvatar())
+                .gender(user.getGender() == 1 ? "男" : "女")
+                .createTime(user.getCreateTime())
+                .build();
     }
 
 

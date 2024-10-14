@@ -1,6 +1,7 @@
 package com.soft.book.controller;
 
 import com.soft.book.cache.GlobalCache;
+import com.soft.book.model.vo.UserVO;
 import com.soft.book.service.UserService;
 import com.soft.book.utils.ResultUtil;
 import jakarta.servlet.ServletException;
@@ -32,9 +33,9 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
-        boolean flag = userService.login(username, password);
-        if (flag) {
-            req.getSession().setAttribute("token", username);
+        UserVO user = userService.login(username, password);
+        if (user != null) {
+            req.getSession().setAttribute("user", user);
             ResultUtil.alertMessage("登录成功", resp);
             resp.sendRedirect("/index");
         }  else {

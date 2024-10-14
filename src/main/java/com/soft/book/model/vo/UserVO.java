@@ -24,11 +24,8 @@ public class UserVO {
     private Integer id;
     private String username;
     private String nickname;
-    private String password;
     private String avatar;
-    private Integer gender;
-    private Integer deleteFlag;
+    private String gender;
     private Date createTime;
-    private Date updateTime;
 
 }

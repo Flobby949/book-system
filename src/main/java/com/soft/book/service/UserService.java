@@ -1,6 +1,7 @@
 package com.soft.book.service;
 
 import com.soft.book.model.dto.UserDTO;
+import com.soft.book.model.vo.UserVO;
 
 /**
  * @author : Flobby
@@ -15,6 +16,6 @@ public interface UserService {
 
     boolean validate(String username);
 
-    boolean login(String username, String password);
+    UserVO login(String username, String password);
 
 }

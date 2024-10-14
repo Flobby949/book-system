@@ -20,8 +20,9 @@ public class LoginFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpSession session = request.getSession();
-        Object token = session.getAttribute("token");
-        if (token == null || token.toString().isEmpty()) {
+        Object user = session.getAttribute("user");
+        if (user == null) {
+            System.out.println("LoginFilter.doFilter: 用户未登录");
             request.getRequestDispatcher("/login").forward(request, servletResponse);
         } else {
             filterChain.doFilter(request, servletResponse);
