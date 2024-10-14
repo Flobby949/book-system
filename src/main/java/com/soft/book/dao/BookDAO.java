@@ -14,4 +14,6 @@ import java.util.List;
 public interface BookDAO {
 
     List<Book> selectAllBooks();
+
+    Book selectBookById(Integer bookId);
 }

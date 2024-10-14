@@ -14,4 +14,6 @@ import java.util.List;
 public interface BookService {
 
     List<Book> queryAllBooks();
+
+    Book queryBookDetailById(Integer bookId);
 }

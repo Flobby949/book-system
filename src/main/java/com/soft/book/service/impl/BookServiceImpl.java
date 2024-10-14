@@ -23,4 +23,9 @@ public class BookServiceImpl implements BookService {
         System.out.println("BookServiceImpl.queryAllBooks");
         return bookDAO.selectAllBooks();
     }
+
+    @Override
+    public Book queryBookDetailById(Integer bookId) {
+        return bookDAO.selectBookById(bookId);
+    }
 }

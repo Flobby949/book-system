@@ -29,4 +29,14 @@ public class BookDaoImpl implements BookDAO {
             return Collections.emptyList();
         }
     }
+
+    @Override
+    public Book selectBookById(Integer bookId) {
+        String sql = "select * from t_book where pk_id = ? and delete_flag = 0";
+        try {
+            return jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<>(Book.class), bookId);
+        } catch (Exception e) {
+            return null;
+        }
+    }
 }
